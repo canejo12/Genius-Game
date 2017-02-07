@@ -35,13 +35,24 @@ void setup() {
   Serial.begin(9600);
   defPortas();
   inicia();
-  tone(BUZZER,31);
+  /*tone(BUZZER,261);    
+  delay(1000);
+  noTone(BUZZER); 
+  tone(BUZZER,293);             
+  delay(1000);    
+  noTone(BUZZER); 
+  tone(BUZZER,329);      
+  delay(1000);
+  noTone(BUZZER);     
+  tone(BUZZER,349);    
+  delay(1000);    
+  noTone(BUZZER); 
+  tone(BUZZER,392);            
   delay(1000);
   noTone(BUZZER);
-  tone(BUZZER,500);
-  delay(1000);
-  noTone(BUZZER);
+  */ 
 }
+
 
 //Roda varias vezes no programa
 void loop() {
@@ -55,13 +66,13 @@ void loop() {
       processaResposta();
       break;
     case JOGO_FINALIZADO_SUCESSO:
-      piscajunto();
+      sucesso();
       Serial.println("final sucesso");
       break;
     case JOGO_FINALIZADO_FALHA:
       falha();
       Serial.println("final falha");
-      break; 
+      break;
   }
   delay(500);
 }
@@ -162,7 +173,7 @@ int checkresposta(){
 }
 
 // Função que faz todas leds piscarem juntos e depois apagarem
-void piscajunto(){
+void sucesso(){
   digitalWrite(BLED,HIGH);
   digitalWrite(RLED,HIGH);
   digitalWrite(YLED,HIGH);
@@ -175,9 +186,15 @@ void piscajunto(){
   delay(500);
 }
 
-// Pisca o led vermelho quando o jogador falhar
+// Pisca o led vermelho e toca o buzzer quando o jogador falhar
 void falha(){
   piscaLed(RLED);
+  tone(BUZZER,200);
+  delay(1000);
+  noTone(BUZZER);
+  tone(BUZZER,5000);
+  delay(1000);
+  noTone(BUZZER); 
 }
 
 // Pisca qualquer led escolhido
