@@ -9,7 +9,7 @@
 #define GBOT 13
 
 //quantidade de cores a serem piscadas
-#define QTD 8
+#define QTD 9
 
 //Enumeração de estados possiveis do jogo
 enum Estados{
