@@ -17,7 +17,7 @@
 #define BUZZER 6
 
 //quantidade de cores a serem piscadas
-#define QTD 9
+#define QTD 8
 
 //Enumeração de estados possiveis do jogo
 enum Estados{
@@ -185,7 +185,9 @@ void sucesso(){
   digitalWrite(RLED,HIGH);
   digitalWrite(YLED,HIGH);
   digitalWrite(GLED,HIGH);
-  delay(1000);
+  tone(BUZZER,300);
+  delay(2000);
+  noTone(BUZZER);
   digitalWrite(BLED,LOW);
   digitalWrite(RLED,LOW);
   digitalWrite(YLED,LOW);
