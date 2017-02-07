@@ -7,6 +7,7 @@
 #define YBOT 12
 #define GLED 5
 #define GBOT 13
+#define BUZZER 6
 
 //quantidade de cores a serem piscadas
 #define QTD 9
@@ -19,6 +20,7 @@ enum Estados{
   JOGO_FINALIZADO_FALHA
 };
 
+
 // Vetor que define a sequencia de leds
 int sequencia[QTD];
 
@@ -28,12 +30,14 @@ int rodada = 0;
 // Variavel que conta quantos leds foram respondidos na rodada
 int leds_respondidos = 0;
 
+//Roda uma vez ao programa iniciar
 void setup() {
   Serial.begin(9600);
   defPortas();
   inicia();
 }
 
+//Roda varias vezes no programa
 void loop() {
   switch(estadoAtual()){
     case PRONTO_PARA_PROX_RODADA:
@@ -49,7 +53,7 @@ void loop() {
       Serial.println("final sucesso");
       break;
     case JOGO_FINALIZADO_FALHA:
-      Falha();
+      falha();
       Serial.println("final falha");
       break; 
   }
@@ -124,7 +128,8 @@ void defPortas(){
   pinMode(YLED,OUTPUT);
   pinMode(YBOT,INPUT_PULLUP);
   pinMode(GLED,OUTPUT);
-  pinMode(GBOT,INPUT_PULLUP);   
+  pinMode(GBOT,INPUT_PULLUP);
+  pinMode(BUZZER,OUTPUT);
 }
 
 
@@ -165,7 +170,7 @@ void piscajunto(){
 }
 
 // Pisca o led vermelho quando o jogador falhar
-void Falha(){
+void falha(){
   piscaLed(RLED);
 }
 
