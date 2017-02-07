@@ -35,6 +35,12 @@ void setup() {
   Serial.begin(9600);
   defPortas();
   inicia();
+  tone(BUZZER,31);
+  delay(1000);
+  noTone(BUZZER);
+  tone(BUZZER,500);
+  delay(1000);
+  noTone(BUZZER);
 }
 
 //Roda varias vezes no programa
