@@ -1,3 +1,14 @@
-Instru��es para o genius_game:
+#INSTRUÇÕES#
+
+
+  O Genius_Game é um jogo que consiste na tentativa de acerto da sequência de cores apresentada pelo conjunto de leds,
+que é gerada aleatoriamente.
+
+-São 4 botões e 4 LEDs.Um botão para cada cor.
+-Ao ligar o arduino o jogo começa automaticamente,iniciando a sequência de cores que se deve repetir.
+-Aperte o botão correspendente a cor do LED para executar sua sequência.
+-Se você errar, o LED vermelho acenderá e será possível ouvir um som vindo do buzzer.
+-Se acertar a sequência, todos os LEDs acenderão.
+-Para jogar novamente e iniciar uma nova sequência,aperte o botão reset do arduino.
 
 
