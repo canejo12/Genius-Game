@@ -16,7 +16,6 @@
 #define GBOT 13
 #define BUZZER 6
 
-int v = 0;
 
 //quantidade de cores a serem piscadas
 #define QTD 8
@@ -80,7 +79,6 @@ void loop() {
       break;
     case JOGO_FINALIZADO_FALHA:
       falha();
-      Serial.println("final falha");
       break;
   }
   delay(500);
