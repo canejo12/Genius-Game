@@ -1,5 +1,5 @@
 /************************\
-** GENIUS GAME          **
+**     GENIUS GAME      **
 *                        *
 ** Made by Lucas Canejo **
 \************************/
@@ -15,6 +15,8 @@
 #define GLED 5
 #define GBOT 13
 #define BUZZER 6
+
+int v = 0;
 
 //quantidade de cores a serem piscadas
 #define QTD 8
@@ -203,7 +205,17 @@ void falha(){
   noTone(BUZZER);
   tone(BUZZER,5000);
   delay(1000);
-  noTone(BUZZER); 
+  noTone(BUZZER);
+  Serial.println("ERROUUUUUUUU");
+  /*
+  piscaLed(RLED);
+  tone(BUZZER,200);
+  delay(1000);
+  noTone(BUZZER);
+  tone(BUZZER,5000);
+  delay(1000);
+  noTone(BUZZER);
+  */ 
 }
 
 // Pisca qualquer led escolhido
