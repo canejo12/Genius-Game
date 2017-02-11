@@ -28,6 +28,7 @@ enum Estados{
   JOGO_FINALIZADO_FALHA
 };
 
+int pontos = 0;
 
 // Vetor que define a sequencia de leds
 int sequencia[QTD];
@@ -43,8 +44,6 @@ void setup() {
   Serial.begin(9600);
   defPortas();
   inicia();
-  digitalWrite(BLED,HIGH);
-  delay(1000);
   /*
   tone(BUZZER,65535);    
   delay(10000);
@@ -78,7 +77,6 @@ void loop() {
       break;
     case JOGO_FINALIZADO_SUCESSO:
       sucesso();
-      Serial.println("final sucesso");
       break;
     case JOGO_FINALIZADO_FALHA:
       falha();
@@ -94,13 +92,14 @@ void tocaLeds(){
   }
 }
 
+
 // Função que prepara uma nova rodada para ser jogada
 void preparaNovaRodada(){
   rodada++;
   if(rodada <= QTD){
   tocaLeds();
   }
-  leds_respondidos = 0;  
+  leds_respondidos = 0;    
 }
 
 // Função que processa a reposta do usuario
@@ -111,6 +110,7 @@ void processaResposta(){
     }
     if(resposta == sequencia[leds_respondidos]){
     leds_respondidos++;
+    pontos++;
     }else{
       Serial.println("Resposta errada");
       rodada = QTD + 2;
@@ -196,6 +196,10 @@ void sucesso(){
   digitalWrite(YLED,LOW);
   digitalWrite(GLED,LOW);
   delay(500);
+  Serial.print(pontos);
+  Serial.print(" ");
+  Serial.print("pontos");
+  Serial.print("\n");  
 }
 
 // Pisca o led vermelho e toca o buzzer quando o jogador falhar
@@ -208,6 +212,10 @@ void falha(){
   tone(BUZZER,5000);
   delay(1000);
   noTone(BUZZER);
+  Serial.print(pontos);
+  Serial.print(" ");
+  Serial.print("pontos");
+  Serial.print("\n");  
   /*
   piscaLed(RLED);
   tone(BUZZER,200);
