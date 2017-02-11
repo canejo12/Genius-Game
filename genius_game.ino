@@ -43,8 +43,11 @@ void setup() {
   Serial.begin(9600);
   defPortas();
   inicia();
-  /*tone(BUZZER,261);    
+  digitalWrite(BLED,HIGH);
   delay(1000);
+  /*
+  tone(BUZZER,65535);    
+  delay(10000);
   noTone(BUZZER); 
   tone(BUZZER,293);             
   delay(1000);    
@@ -54,7 +57,7 @@ void setup() {
   noTone(BUZZER);     
   tone(BUZZER,349);    
   delay(1000);    
-  noTone(BUZZER); 
+  noTone(BUZZER);
   tone(BUZZER,392);            
   delay(1000);
   noTone(BUZZER);
@@ -197,6 +200,7 @@ void sucesso(){
 
 // Pisca o led vermelho e toca o buzzer quando o jogador falhar
 void falha(){
+  Serial.println("ERROUUUUUUUU otaro");
   piscaLed(RLED);
   tone(BUZZER,200);
   delay(1000);
@@ -204,7 +208,6 @@ void falha(){
   tone(BUZZER,5000);
   delay(1000);
   noTone(BUZZER);
-  Serial.println("ERROUUUUUUUU");
   /*
   piscaLed(RLED);
   tone(BUZZER,200);
