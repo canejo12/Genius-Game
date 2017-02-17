@@ -4,6 +4,8 @@
 ** Made by Lucas Canejo **
 \************************/
 
+//Adiciona biblioteca para EEPROM
+#include <EEPROM.h>
 
 //defines das portas 
 #define RLED 2
@@ -18,7 +20,7 @@
 
 
 //quantidade de cores a serem piscadas
-#define QTD 8
+#define QTD 10
 
 //Enumeração de estados possiveis do jogo
 enum Estados{
@@ -29,6 +31,8 @@ enum Estados{
 };
 
 int pontos = 0;
+
+int recorde = 0;
 
 // Vetor que define a sequencia de leds
 int sequencia[QTD];
@@ -44,23 +48,10 @@ void setup() {
   Serial.begin(9600);
   defPortas();
   inicia();
-  /*
-  tone(BUZZER,65535);    
-  delay(10000);
-  noTone(BUZZER); 
-  tone(BUZZER,293);             
-  delay(1000);    
-  noTone(BUZZER); 
-  tone(BUZZER,329);      
-  delay(1000);
-  noTone(BUZZER);     
-  tone(BUZZER,349);    
-  delay(1000);    
-  noTone(BUZZER);
-  tone(BUZZER,392);            
-  delay(1000);
-  noTone(BUZZER);
-  */ 
+  //limpa();
+  carregaRecorde();
+  Serial.print("Recorde atual: ");
+  Serial.println(recorde);
 }
 
 
@@ -82,6 +73,7 @@ void loop() {
       falha();
       break;
   }
+  checaRecorde();
   delay(500);
 }
 
@@ -139,6 +131,27 @@ void inicia(){
   for(int i = 0; i < QTD; i++){
     sequencia[i] = sorteio(); 
   } 
+}
+
+//Função para limpar a memoria do EEPROM, porém ainda falta algumas alteracoes nela
+void limpa(){
+  for (int i = 0 ; i < EEPROM.length() ; i++) {
+    EEPROM.write(i, 0);
+  }
+}
+
+//Função que carrega o recorde da memoria
+void carregaRecorde(){
+  recorde = EEPROM.read(0);  
+}
+
+
+//Função que checa o recorde e confere se voce bateu o recorde atual
+void checaRecorde(){
+  if(pontos > recorde){
+    recorde = pontos;
+    EEPROM.write(0,recorde);
+  }
 }
 
 //Função que retorna os leds que irão piscar por sorteio
@@ -212,19 +225,12 @@ void falha(){
   tone(BUZZER,5000);
   delay(1000);
   noTone(BUZZER);
+  Serial.print(recorde);
+  Serial.print("\n");
   Serial.print(pontos);
-  Serial.print(" ");
-  Serial.print("pontos");
+  Serial.print(" pontos");
   Serial.print("\n");  
-  /*
-  piscaLed(RLED);
-  tone(BUZZER,200);
-  delay(1000);
-  noTone(BUZZER);
-  tone(BUZZER,5000);
-  delay(1000);
-  noTone(BUZZER);
-  */ 
+
 }
 
 // Pisca qualquer led escolhido
