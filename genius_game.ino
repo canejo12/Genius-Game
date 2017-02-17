@@ -210,9 +210,7 @@ void sucesso(){
   digitalWrite(GLED,LOW);
   delay(500);
   Serial.print(pontos);
-  Serial.print(" ");
-  Serial.print("pontos");
-  Serial.print("\n");  
+  Serial.print(" pontos\n");  
 }
 
 // Pisca o led vermelho e toca o buzzer quando o jogador falhar
@@ -228,9 +226,7 @@ void falha(){
   Serial.print(recorde);
   Serial.print("\n");
   Serial.print(pontos);
-  Serial.print(" pontos");
-  Serial.print("\n");  
-
+  Serial.print(" pontos\n");  
 }
 
 // Pisca qualquer led escolhido
