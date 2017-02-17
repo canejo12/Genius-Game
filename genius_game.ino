@@ -133,7 +133,7 @@ void inicia(){
   } 
 }
 
-//Função para limpar a memoria do EEPROM, porém ainda falta algumas alteracoes nela
+//Função para limpar a memoria do recorde atual
 void limpa(){
   if(digitalRead(BBOT) == LOW && digitalRead(GBOT) == LOW){
     Serial.print("Limpando...\n");
