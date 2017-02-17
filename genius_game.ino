@@ -20,7 +20,7 @@
 
 
 //quantidade de cores a serem piscadas
-#define QTD 10
+#define QTD 50
 
 //Enumeração de estados possiveis do jogo
 enum Estados{
@@ -50,10 +50,8 @@ void setup() {
   Serial.begin(9600);
   defPortas();
   inicia();
-  //limpa();
+  limpa();
   carregaRecorde();
-  Serial.print("Recorde atual: ");
-  Serial.println(recorde);
 }
 
 
@@ -137,20 +135,29 @@ void inicia(){
 
 //Função para limpar a memoria do EEPROM, porém ainda falta algumas alteracoes nela
 void limpa(){
-  for (int i = 0 ; i < EEPROM.length() ; i++) {
-    EEPROM.write(i, 0);
+  if(digitalRead(BBOT) == LOW && digitalRead(GBOT) == LOW){
+    Serial.print("Limpando...\n");
+    for (int i = 0 ; i < EEPROM.length() ; i++) {
+      EEPROM.write(i, 0);
+    }
+  Serial.print("Memoria limpa\n");   
   }
+ 
 }
 
 //Função que carrega o recorde da memoria
 void carregaRecorde(){
-  recorde = EEPROM.read(0);  
+  recorde = EEPROM.read(0); 
+  Serial.print("Recorde atual: ");
+  Serial.print(recorde);
+  Serial.print(" pontos\n"); 
 }
 
 
 //Função que checa o recorde e confere se voce bateu o recorde atual
 void checaRecorde(){
   if(pontos > recorde){
+    Serial.print("Voce bateu o recorde\n");
     recorde = pontos;
     EEPROM.write(0,recorde);
   }
