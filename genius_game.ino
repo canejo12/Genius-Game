@@ -30,8 +30,10 @@ enum Estados{
   JOGO_FINALIZADO_FALHA
 };
 
+//Variavel com a quantidade de pontos da jogada
 int pontos = 0;
 
+//Variavel que salva o recorde
 int recorde = 0;
 
 // Vetor que define a sequencia de leds
@@ -55,7 +57,7 @@ void setup() {
 }
 
 
-//Roda varias vezes no programa
+//Roda varias vezes durante o programa
 void loop() {
   switch(estadoAtual()){
     case PRONTO_PARA_PROX_RODADA:
@@ -195,7 +197,7 @@ int checkresposta(){
   return -1;
 }
 
-// Função que faz todas leds piscarem juntos e depois apagarem
+// Função que faz todas leds piscarem juntos e depois apagarem em caso de sucesso do jogador
 void sucesso(){
   digitalWrite(BLED,HIGH);
   digitalWrite(RLED,HIGH);
